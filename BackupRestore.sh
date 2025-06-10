@@ -15,7 +15,7 @@ for FILE in "$BACKUP_LOCATION"/*.tar.gz; do
     if [ -f "$FILE" ]; then
         # Restore
         echo "Extracting $DIRECTORY_NAME backup.."
-        tar -xvf "$FILE" -C "$RESTORE_DIR"
+        pv "$FILE" | gunzip | tar -xf - -C "$RESTORE_DIR"
         # Check status
         if [ $? -eq 0 ]; then
             echo "Restoration of $DIRECTORY_NAME successful."
