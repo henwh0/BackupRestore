@@ -7,6 +7,12 @@ if [ ! -d "$BACKUP_LOCATION" ]; then
     echo "ERROR: Backup directory not found."
     exit 1
 fi
+# Confirmation
+read -p "WARNING: This script will restore files directly to /. Continue? (y/n): " CONFIRM
+if [[ "$CONFIRM" != [yY] ]]; then
+    echo "Script aborted by user."
+    exit 1
+fi
 # Loop through each backup file
 for FILE in "$BACKUP_LOCATION"/*.tar.gz; do
 # Get directory name 
